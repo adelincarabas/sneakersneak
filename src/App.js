@@ -1,19 +1,20 @@
-import './App.css';
-import Toolbar from './components/Toolbar';
-import { BrowserRouter as Router } from "react-router-dom"; 
-import { Route, Routes } from "react-router-dom";
-import DatabasePage from './components/DatabasePage';
+import "./App.css";
+import Toolbar from "./components/Toolbar";
+import { Route, Routes, useLocation } from "react-router-dom";
+import DatabasePage from "./components/DatabasePage";
+import MainPage from "./components/MainPage";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <Router>
-      <div className="App">
-          <Toolbar/>
-          <Routes>
+    <div className="App">
+      {location.pathname !== "/database" && <Toolbar />}
+      {location.pathname === "/" && <MainPage />}
+      <Routes>
         <Route path="/database" element={<DatabasePage />} />
       </Routes>
-      </div>
-    </Router>
+    </div>
   );
 }
 
