@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 const DatabasePage = () => {
-  const getText = () => {
-    return "55";
+  const getText = async () => {
+    try {
+      const response = await fetch("/weatherforecast");
+      const data = await response.text(); // Use .text() for string response
+      setText(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   const [text, setText] = useState("");
